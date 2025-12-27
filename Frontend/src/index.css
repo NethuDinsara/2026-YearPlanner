@@ -338,19 +338,69 @@ body {
   margin-bottom: 1.5rem;
 }
 
-/* Responsive: phones and small tablets */
+/* Responsive: phones and small tablets - off-canvas sidebar */
 @media (max-width: 768px) {
   .sidebar {
-    position: static;
-    width: 100%;
-    height: auto;
-    border-right: none;
-    padding: 1rem 0.5rem;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 80%;
+    max-width: 320px;
+    transform: translateX(-110%);
+    transition: transform 220ms ease;
+    z-index: 1200;
+    box-shadow: 2px 0 12px rgba(0,0,0,0.6);
+    padding: 1.25rem;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 200ms ease, visibility 200ms;
+    z-index: 1100;
+  }
+
+  .overlay.show {
+    opacity: 1;
+    visibility: visible;
   }
 
   .main-content {
     margin-left: 0;
     padding: 1rem;
+  }
+
+  .mobile-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .hamburger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: inherit;
+    font-size: 1.5rem;
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+  }
+
+  .mobile-title {
+    font-size: 1.125rem;
+    font-weight: 600;
   }
 
   .view-container {
@@ -399,6 +449,14 @@ body {
   .goal-actions {
     flex-wrap: wrap;
   }
+
+  /* Utility: make inputs and buttons full-width on small screens */
+  .form-group .form-input,
+  .form-group .form-textarea,
+  .form-group .form-select,
+  .btn-small {
+    width: 100%;
+  }
 }
 
 @media (max-width: 420px) {
@@ -425,15 +483,5 @@ body {
 
   .stat-number {
     font-size: 1.75rem;
-  }
-}
-
-/* Utility: make inputs and buttons full-width on small screens */
-@media (max-width: 768px) {
-  .form-group .form-input,
-  .form-group .form-textarea,
-  .form-group .form-select,
-  .btn-small {
-    width: 100%;
   }
 }
