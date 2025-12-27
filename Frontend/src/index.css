@@ -337,3 +337,103 @@ body {
   color: #ff8888;
   margin-bottom: 1.5rem;
 }
+
+/* Responsive: phones and small tablets */
+@media (max-width: 768px) {
+  .sidebar {
+    position: static;
+    width: 100%;
+    height: auto;
+    border-right: none;
+    padding: 1rem 0.5rem;
+  }
+
+  .main-content {
+    margin-left: 0;
+    padding: 1rem;
+  }
+
+  .view-container {
+    max-width: 100%;
+    padding: 0 0.5rem;
+  }
+
+  .view-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .view-title {
+    font-size: 1.25rem;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+  }
+
+  .form-card {
+    padding: 1rem;
+  }
+
+  .form-actions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .goal-card {
+    padding: 1rem;
+  }
+
+  .goal-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .goal-actions {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 420px) {
+  .logo {
+    font-size: 1.125rem;
+    padding: 0 1rem;
+  }
+
+  .nav-item {
+    padding: 0.5rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  .view-title {
+    font-size: 1.125rem;
+  }
+
+  .form-input,
+  .form-textarea,
+  .form-select {
+    padding: 0.6rem;
+    font-size: 0.95rem;
+  }
+
+  .stat-number {
+    font-size: 1.75rem;
+  }
+}
+
+/* Utility: make inputs and buttons full-width on small screens */
+@media (max-width: 768px) {
+  .form-group .form-input,
+  .form-group .form-textarea,
+  .form-group .form-select,
+  .btn-small {
+    width: 100%;
+  }
+}
