@@ -8,6 +8,7 @@ function YearGoals() {
   const [formData, setFormData] = useState({
     title: '',
     category: '',
+    customCategory: '',
     why: '',
     year: new Date().getFullYear().toString()
   })
@@ -29,19 +30,23 @@ function YearGoals() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    const categoryToSave = formData.category === 'Other' ? (formData.customCategory || '') : formData.category
+    const payload = { ...formData, category: categoryToSave }
     if (editingId) {
-      updateYearGoal(editingId, formData)
+      updateYearGoal(editingId, payload)
     } else {
-      addYearGoal(formData)
+      addYearGoal(payload)
     }
     resetForm()
     loadGoals()
   }
 
   const handleEdit = (goal) => {
+    const known = ['Finance', 'Growth', 'Career', 'Relationships', 'Health']
     setFormData({
       title: goal.title,
-      category: goal.category,
+      category: known.includes(goal.category) ? goal.category : 'Other',
+      customCategory: known.includes(goal.category) ? '' : goal.category,
       why: goal.why,
       year: goal.year
     })
@@ -60,6 +65,7 @@ function YearGoals() {
     setFormData({
       title: '',
       category: '',
+      customCategory: '',
       why: '',
       year: new Date().getFullYear().toString()
     })
@@ -94,14 +100,33 @@ function YearGoals() {
 
           <div className="form-group">
             <label className="form-label">Category</label>
-            <input
-              type="text"
+            <select
               name="category"
               className="form-input"
               value={formData.category}
-              onChange={handleInputChange}
+              onChange={(e) => setFormData({ ...formData, category: e.target.value })}
               required
-            />
+            >
+              <option value="">Select category</option>
+              <option value="Finance">Finance</option>
+              <option value="Growth">Growth</option>
+              <option value="Career">Career</option>
+              <option value="Relationships">Relationships</option>
+              <option value="Health">Health</option>
+              <option value="Other">Other (specify)</option>
+            </select>
+
+            {formData.category === 'Other' && (
+              <input
+                type="text"
+                name="customCategory"
+                className="form-input"
+                placeholder="Specify category"
+                value={formData.customCategory}
+                onChange={(e) => setFormData({ ...formData, customCategory: e.target.value })}
+                required
+              />
+            )}
           </div>
 
           <div className="form-group">
